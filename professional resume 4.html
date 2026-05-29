@@ -1,0 +1,1856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional CV Builder | Adobe Edition</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #9c27b0;
+            --primary-dark: #7b1fa2;
+            --primary-light: #e1bee7;
+            --accent: #ff9800;
+            --dark: #263238;
+            --light: #f5f5f7;
+            --gray: #b0bec5;
+            --success: #4caf50;
+            --danger: #f44336;
+            --warning: #ffc107;
+            --info: #2196f3;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 30px 40px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .header-content h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -0.5px;
+        }
+
+        .header-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-icon {
+            background: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .logo-icon i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.8rem;
+        }
+
+        .main-content {
+            display: flex;
+            min-height: 800px;
+        }
+
+        .form-section {
+            flex: 1;
+            padding: 30px;
+            background: var(--light);
+            border-right: 1px solid #e9ecef;
+            overflow-y: auto;
+            max-height: 800px;
+        }
+
+        .preview-section {
+            flex: 1;
+            padding: 30px;
+            background: #ffffff;
+            overflow-y: auto;
+            max-height: 800px;
+            position: relative;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            font-size: 15px;
+            transition: var(--transition);
+            background: white;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(156, 39, 176, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 16px 25px;
+            margin: 0 -30px 25px -30px;
+            font-size: 18px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-header i {
+            font-size: 1.2em;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn i {
+            font-size: 1.1em;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(156, 39, 176, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-3px);
+        }
+
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent) 0%, #f57c00 100%);
+            color: white;
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(255, 152, 0, 0.4);
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 13px;
+        }
+
+        .dynamic-section {
+            border: 2px solid #e9ecef;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: white;
+            position: relative;
+            transition: var(--transition);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.03);
+        }
+
+        .dynamic-section:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transform: translateY(-3px);
+            border-color: var(--primary-light);
+        }
+
+        .remove-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .remove-btn:hover {
+            background: #d32f2f;
+            transform: scale(1.1);
+        }
+
+        .template-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .template-option {
+            padding: 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .template-option:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .template-option.active {
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(156, 39, 176, 0.15);
+        }
+
+        .template-option::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-top: 40px solid var(--primary);
+            border-left: 40px solid transparent;
+        }
+
+        .template-option.active::after {
+            content: '✓';
+            color: white;
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            font-size: 16px;
+            z-index: 2;
+        }
+
+        .template-preview {
+            height: 180px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .template-info {
+            text-align: center;
+        }
+
+        .template-info strong {
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .cv-preview {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            min-height: 500px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cv-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+        }
+
+        .cv-preview:hover {
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .cv-header {
+            text-align: center;
+            padding-bottom: 25px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .cv-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 2px;
+        }
+
+        .cv-header h1 {
+            font-size: 2.8rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: -0.5px;
+        }
+
+        .cv-header p {
+            color: var(--primary);
+            font-size: 1.3rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .cv-contact {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .cv-contact span {
+            color: var(--dark);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cv-contact i {
+            color: var(--primary);
+            font-size: 1.2em;
+        }
+
+        .cv-section {
+            margin-bottom: 35px;
+            position: relative;
+        }
+
+        .cv-section h2 {
+            color: var(--dark);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .cv-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 2px;
+        }
+
+        .cv-section h2 i {
+            color: var(--primary);
+        }
+
+        .cv-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            border-left: 4px solid var(--primary);
+            background: rgba(156, 39, 176, 0.03);
+            border-radius: 0 12px 12px 0;
+            transition: var(--transition);
+        }
+
+        .cv-item:hover {
+            transform: translateX(5px);
+            background: rgba(156, 39, 176, 0.06);
+        }
+
+        .cv-item h3 {
+            color: var(--dark);
+            margin-bottom: 5px;
+            font-size: 1.3rem;
+        }
+
+        .cv-item .meta {
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .cv-item .meta i {
+            font-size: 0.9em;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .skill-item {
+            background: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .skill-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(156, 39, 176, 0.3);
+        }
+
+        .skill-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: translateX(-100%);
+        }
+
+        .skill-item:hover::after {
+            animation: shine 1.5s ease infinite;
+        }
+
+        @keyframes shine {
+            100% { transform: translateX(100%); }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+            transition: width 0.5s ease;
+        }
+
+        .floating-actions {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .floating-btn {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .floating-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: translateX(-100%);
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+        }
+
+        .floating-btn:hover::after {
+            animation: shine 1.5s ease infinite;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, var(--success) 0%, #2e7d32 100%);
+        }
+
+        .save-btn {
+            background: linear-gradient(135deg, var(--info) 0%, #1565c0 100%);
+        }
+
+        .ai-btn {
+            background: linear-gradient(135deg, var(--accent) 0%, #e65100 100%);
+        }
+
+        .theme-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .theme-color {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: var(--transition);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .theme-color:hover {
+            transform: scale(1.1);
+        }
+
+        .theme-color.active {
+            border-color: white;
+            box-shadow: 0 0 0 3px var(--dark);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: var(--primary);
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .notification {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            padding: 18px 30px;
+            border-radius: 12px;
+            color: white;
+            font-weight: 500;
+            z-index: 1000;
+            transform: translateX(120%);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background: linear-gradient(135deg, var(--success) 0%, #2e7d32 100%);
+        }
+
+        .notification.error {
+            background: linear-gradient(135deg, var(--danger) 0%, #c62828 100%);
+        }
+
+        .notification.info {
+            background: linear-gradient(135deg, var(--info) 0%, #1565c0 100%);
+        }
+
+        .notification i {
+            font-size: 1.4rem;
+        }
+
+        .ai-assist {
+            position: absolute;
+            right: 15px;
+            top: 45px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 15px;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+            z-index: 2;
+        }
+
+        .ai-assist:hover {
+            background: #ef6c00;
+            transform: translateY(-2px);
+        }
+
+        .ai-assist i {
+            font-size: 1.1em;
+        }
+
+        .auto-save {
+            font-size: 13px;
+            color: #6c757d;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .auto-save i {
+            color: var(--success);
+        }
+
+        .collaboration {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(33, 150, 243, 0.1);
+            padding: 12px 18px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border-left: 4px solid var(--info);
+        }
+
+        .collaboration i {
+            color: var(--info);
+            font-size: 1.4rem;
+        }
+
+        .collaboration-text {
+            font-size: 14px;
+            color: var(--dark);
+        }
+
+        .collaboration .users {
+            display: flex;
+            margin-left: auto;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--info);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-left: -10px;
+            border: 2px solid white;
+        }
+
+        .user-avatar:first-child {
+            margin-left: 0;
+        }
+
+        .pdf-options {
+            background: rgba(156, 39, 176, 0.05);
+            padding: 20px;
+            border-radius: 16px;
+            margin-top: 25px;
+            border: 1px dashed var(--primary);
+        }
+
+        .pdf-options h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .option-group {
+            margin-bottom: 15px;
+        }
+
+        .option-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .option-group select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            background: white;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @media (max-width: 1200px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .form-section, .preview-section {
+                max-height: none;
+            }
+            
+            .cv-contact {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+            
+            .template-selector {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .header-content {
+                order: 2;
+            }
+            
+            .logo {
+                order: 1;
+            }
+            
+            .template-selector {
+                grid-template-columns: 1fr;
+            }
+            
+            .floating-actions {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .cv-preview {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <h1>Professional CV Builder</h1>
+                <p>Create stunning resumes with AI-powered suggestions and real-time collaboration</p>
+            </div>
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-file-contract"></i>
+                </div>
+                <div class="logo-text">CV<span style="color: #ff9800;">PRO</span></div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="form-section">
+                <div class="section-header"><i class="fas fa-palette"></i> CV Templates</div>
+                <div class="template-selector">
+                    <div class="template-option active" data-template="modern">
+                        <div class="template-preview">Modern</div>
+                        <div class="template-info">
+                            <strong>Adobe Creative</strong>
+                            <p>Clean & Professional</p>
+                        </div>
+                    </div>
+                    <div class="template-option" data-template="classic">
+                        <div class="template-preview">Classic</div>
+                        <div class="template-info">
+                            <strong>Corporate Pro</strong>
+                            <p>Traditional & Elegant</p>
+                        </div>
+                    </div>
+                    <div class="template-option" data-template="creative">
+                        <div class="template-preview">Creative</div>
+                        <div class="template-info">
+                            <strong>Design Master</strong>
+                            <p>Bold & Unique</p>
+                        </div>
+                    </div>
+                    <div class="template-option" data-template="minimal">
+                        <div class="template-preview">Minimal</div>
+                        <div class="template-info">
+                            <strong>Minimalist</strong>
+                            <p>Simple & Effective</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-header"><i class="fas fa-fill-drip"></i> Color Theme</div>
+                <div class="theme-selector">
+                    <div class="theme-color active" data-color="#9c27b0" style="background: #9c27b0;"></div>
+                    <div class="theme-color" data-color="#2196f3" style="background: #2196f3;"></div>
+                    <div class="theme-color" data-color="#4caf50" style="background: #4caf50;"></div>
+                    <div class="theme-color" data-color="#ff9800" style="background: #ff9800;"></div>
+                    <div class="theme-color" data-color="#e91e63" style="background: #e91e63;"></div>
+                    <div class="theme-color" data-color="#673ab7" style="background: #673ab7;"></div>
+                    <div class="theme-color" data-color="#00bcd4" style="background: #00bcd4;"></div>
+                </div>
+
+                <div class="section-header"><i class="fas fa-user"></i> Personal Information</div>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="fullName" placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Professional Title</label>
+                    <input type="text" id="title" placeholder="Senior Software Engineer">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" placeholder="john.doe@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="tel" id="phone" placeholder="+1 (555) 123-4567">
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="location" placeholder="San Francisco, CA">
+                </div>
+                <div class="form-group">
+                    <label>LinkedIn</label>
+                    <input type="url" id="linkedin" placeholder="linkedin.com/in/johndoe">
+                </div>
+                <div class="form-group">
+                    <label>Professional Summary</label>
+                    <textarea id="summary" placeholder="Brief overview of your professional background and key achievements..."></textarea>
+                    <button class="ai-assist" onclick="generateAIContent('summary')">
+                        <i class="fas fa-robot"></i> AI Assist
+                    </button>
+                </div>
+
+                <div class="section-header"><i class="fas fa-graduation-cap"></i> Education</div>
+                <div id="education-container"></div>
+                <button class="btn btn-primary" onclick="addEducation()">
+                    <i class="fas fa-plus"></i> Add Education
+                </button>
+
+                <div class="section-header"><i class="fas fa-briefcase"></i> Work Experience</div>
+                <div id="experience-container"></div>
+                <button class="btn btn-primary" onclick="addExperience()">
+                    <i class="fas fa-plus"></i> Add Experience
+                </button>
+
+                <div class="section-header"><i class="fas fa-tools"></i> Skills</div>
+                <div id="skills-container"></div>
+                <button class="btn btn-primary" onclick="addSkill()">
+                    <i class="fas fa-plus"></i> Add Skill
+                </button>
+
+                <div class="section-header"><i class="fas fa-project-diagram"></i> Projects</div>
+                <div id="projects-container"></div>
+                <button class="btn btn-primary" onclick="addProject()">
+                    <i class="fas fa-plus"></i> Add Project
+                </button>
+
+                <div class="section-header"><i class="fas fa-award"></i> Certifications</div>
+                <div id="certifications-container"></div>
+                <button class="btn btn-primary" onclick="addCertification()">
+                    <i class="fas fa-plus"></i> Add Certification
+                </button>
+
+                <div class="pdf-options">
+                    <h3><i class="fas fa-file-pdf"></i> PDF Export Options</h3>
+                    <div class="options-grid">
+                        <div class="option-group">
+                            <label>Page Size</label>
+                            <select id="pageSize">
+                                <option value="letter">Letter</option>
+                                <option value="a4">A4</option>
+                                <option value="legal">Legal</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label>Orientation</label>
+                            <select id="orientation">
+                                <option value="portrait">Portrait</option>
+                                <option value="landscape">Landscape</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label>Margin</label>
+                            <select id="margin">
+                                <option value="10">10mm</option>
+                                <option value="15" selected>15mm</option>
+                                <option value="20">20mm</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label>Quality</label>
+                            <select id="quality">
+                                <option value="0.8">Standard</option>
+                                <option value="1.0" selected>High</option>
+                                <option value="1.5">Ultra</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collaboration">
+                    <i class="fas fa-users"></i>
+                    <div class="collaboration-text">
+                        <strong>Real-time Collaboration</strong>
+                        <p>Working with team members</p>
+                    </div>
+                    <div class="users">
+                        <div class="user-avatar">JD</div>
+                        <div class="user-avatar">AJ</div>
+                        <div class="user-avatar">MK</div>
+                    </div>
+                </div>
+
+                <div class="auto-save">
+                    <i class="fas fa-sync-alt"></i>
+                    <span id="auto-save-status">Auto-save: Ready</span>
+                </div>
+            </div>
+
+            <div class="preview-section">
+                <div class="section-header"><i class="fas fa-eye"></i> Live Preview</div>
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Updating preview...</p>
+                </div>
+                <div class="cv-preview" id="cv-preview">
+                    <div class="cv-header">
+                        <h1 id="preview-name">Your Name</h1>
+                        <p id="preview-title">Professional Title</p>
+                        <div class="cv-contact">
+                            <span><i class="fas fa-envelope"></i> <span id="preview-email">email@example.com</span></span>
+                            <span><i class="fas fa-phone"></i> <span id="preview-phone">+1 (555) 123-4567</span></span>
+                            <span><i class="fas fa-map-marker-alt"></i> <span id="preview-location">Location</span></span>
+                            <span><i class="fab fa-linkedin"></i> <span id="preview-linkedin">LinkedIn</span></span>
+                        </div>
+                    </div>
+                    
+                    <div class="cv-section" id="summary-section">
+                        <h2><i class="fas fa-user-tie"></i> Professional Summary</h2>
+                        <p id="preview-summary">Your professional summary will appear here...</p>
+                    </div>
+                    
+                    <div class="cv-section" id="experience-section">
+                        <h2><i class="fas fa-briefcase"></i> Work Experience</h2>
+                        <div id="preview-experience"></div>
+                    </div>
+                    
+                    <div class="cv-section" id="education-section">
+                        <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+                        <div id="preview-education"></div>
+                    </div>
+                    
+                    <div class="cv-section" id="skills-section">
+                        <h2><i class="fas fa-tools"></i> Skills</h2>
+                        <div id="preview-skills" class="skills-grid"></div>
+                    </div>
+                    
+                    <div class="cv-section" id="projects-section">
+                        <h2><i class="fas fa-project-diagram"></i> Projects</h2>
+                        <div id="preview-projects"></div>
+                    </div>
+                    
+                    <div class="cv-section" id="certifications-section">
+                        <h2><i class="fas fa-award"></i> Certifications</h2>
+                        <div id="preview-certifications"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="floating-actions">
+        <button class="floating-btn ai-btn" onclick="showAIPanel()" title="AI Assistant">
+            <i class="fas fa-robot"></i>
+        </button>
+        <button class="floating-btn save-btn" onclick="saveData()" title="Save Data">
+            <i class="fas fa-save"></i>
+        </button>
+        <button class="floating-btn download-btn" onclick="downloadPDF()" title="Download PDF">
+            <i class="fas fa-download"></i>
+        </button>
+    </div>
+
+    <script>
+        // Global variables
+        let currentTheme = '#9c27b0';
+        let currentTemplate = 'modern';
+        let autoSaveTimeout;
+        let educationCount = 0;
+        let experienceCount = 0;
+        let skillsCount = 0;
+        let projectsCount = 0;
+        let certificationsCount = 0;
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSavedData();
+            setupEventListeners();
+            updatePreview();
+            addSampleData();
+        });
+
+        function setupEventListeners() {
+            // Personal information listeners
+            const personalFields = ['fullName', 'title', 'email', 'phone', 'location', 'linkedin', 'summary'];
+            personalFields.forEach(field => {
+                const element = document.getElementById(field);
+                if (element) {
+                    element.addEventListener('input', () => {
+                        updatePreview();
+                        triggerAutoSave();
+                    });
+                }
+            });
+
+            // Template selector
+            document.querySelectorAll('.template-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.template-option').forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    currentTemplate = this.dataset.template;
+                    updatePreview();
+                    showNotification(`Template changed to ${this.querySelector('strong').textContent}`, 'info');
+                });
+            });
+
+            // Theme selector
+            document.querySelectorAll('.theme-color').forEach(color => {
+                color.addEventListener('click', function() {
+                    document.querySelectorAll('.theme-color').forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    currentTheme = this.dataset.color;
+                    updateTheme();
+                    updatePreview();
+                    showNotification('Theme updated successfully', 'success');
+                });
+            });
+        }
+
+        function updateTheme() {
+            const root = document.documentElement;
+            root.style.setProperty('--primary', currentTheme);
+            
+            // Calculate darker version for primary-dark
+            const darker = shadeColor(currentTheme, -30);
+            root.style.setProperty('--primary-dark', darker);
+            
+            // Update theme-dependent elements
+            const themeElements = document.querySelectorAll('.cv-header::after, .cv-section h2::after, .cv-item, .skill-item, .section-header');
+            themeElements.forEach(element => {
+                element.style.borderColor = currentTheme;
+                element.style.background = `linear-gradient(135deg, ${currentTheme} 0%, ${darker} 100%)`;
+            });
+        }
+
+        function shadeColor(color, percent) {
+            let R = parseInt(color.substring(1, 3), 16);
+            let G = parseInt(color.substring(3, 5), 16);
+            let B = parseInt(color.substring(5, 7), 16);
+
+            R = parseInt(R * (100 + percent) / 100);
+            G = parseInt(G * (100 + percent) / 100);
+            B = parseInt(B * (100 + percent) / 100);
+
+            R = (R < 255) ? R : 255;
+            G = (G < 255) ? G : 255;
+            B = (B < 255) ? B : 255;
+
+            R = Math.round(R);
+            G = Math.round(G);
+            B = Math.round(B);
+
+            const RR = ((R.toString(16).length === 1) ? "0" + R.toString(16) : R.toString(16));
+            const GG = ((G.toString(16).length === 1) ? "0" + G.toString(16) : G.toString(16));
+            const BB = ((B.toString(16).length === 1) ? "0" + B.toString(16) : B.toString(16));
+
+            return "#" + RR + GG + BB;
+        }
+
+        function addEducation() {
+            educationCount++;
+            const container = document.getElementById('education-container');
+            const educationHTML = `
+                <div class="dynamic-section" id="education-${educationCount}">
+                    <button class="remove-btn" onclick="removeSection('education-${educationCount}')">&times;</button>
+                    <div class="form-group">
+                        <label>Institution</label>
+                        <input type="text" id="edu-institution-${educationCount}" placeholder="University of Technology">
+                    </div>
+                    <div class="form-group">
+                        <label>Degree</label>
+                        <input type="text" id="edu-degree-${educationCount}" placeholder="Bachelor of Science in Computer Science">
+                    </div>
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" id="edu-location-${educationCount}" placeholder="San Francisco, CA">
+                    </div>
+                    <div class="form-group">
+                        <label>Graduation Year</label>
+                        <input type="number" id="edu-year-${educationCount}" placeholder="2020">
+                    </div>
+                    <div class="form-group">
+                        <label>GPA (Optional)</label>
+                        <input type="text" id="edu-gpa-${educationCount}" placeholder="3.8/4.0">
+                    </div>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', educationHTML);
+            
+            // Add event listeners to new fields
+            const newSection = document.getElementById(`education-${educationCount}`);
+            newSection.querySelectorAll('input').forEach(input => {
+                input.addEventListener('input', () => {
+                    updatePreview();
+                    triggerAutoSave();
+                });
+            });
+        }
+
+        function addExperience() {
+            experienceCount++;
+            const container = document.getElementById('experience-container');
+            const experienceHTML = `
+                <div class="dynamic-section" id="experience-${experienceCount}">
+                    <button class="remove-btn" onclick="removeSection('experience-${experienceCount}')">&times;</button>
+                    <div class="form-group">
+                        <label>Company</label>
+                        <input type="text" id="exp-company-${experienceCount}" placeholder="Meta">
+                    </div>
+                    <div class="form-group">
+                        <label>Position</label>
+                        <input type="text" id="exp-position-${experienceCount}" placeholder="Senior Software Engineer">
+                    </div>
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" id="exp-location-${experienceCount}" placeholder="Menlo Park, CA">
+                    </div>
+                    <div class="form-group">
+                        <label>Start Date</label>
+                        <input type="month" id="exp-start-${experienceCount}">
+                    </div>
+                    <div class="form-group">
+                        <label>End Date</label>
+                        <input type="month" id="exp-end-${experienceCount}">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="exp-current-${experienceCount}" style="width: auto; margin-right: 10px;">
+                            Currently working here
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="exp-description-${experienceCount}" placeholder="• Led a team of 5 engineers to develop scalable web applications&#10;• Improved system performance by 40% through optimization&#10;• Mentored junior developers and conducted code reviews"></textarea>
+                        <button class="ai-assist" onclick="generateAIContent('exp-description-${experienceCount}')">
+                            <i class="fas fa-robot"></i> AI Assist
+                        </button>
+                    </div>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', experienceHTML);
+            
+            // Add event listeners to new fields
+            const newSection = document.getElementById(`experience-${experienceCount}`);
+            newSection.querySelectorAll('input, textarea').forEach(input => {
+                input.addEventListener('input', () => {
+                    updatePreview();
+                    triggerAutoSave();
+                });
+            });
+            
+            // Handle current job checkbox
+            const currentCheckbox = document.getElementById(`exp-current-${experienceCount}`);
+            const endDateInput = document.getElementById(`exp-end-${experienceCount}`);
+            currentCheckbox.addEventListener('change', function() {
+                if (this.checked) {
+                    endDateInput.disabled = true;
+                    endDateInput.value = '';
+                } else {
+                    endDateInput.disabled = false;
+                }
+                updatePreview();
+                triggerAutoSave();
+            });
+        }
+
+        function addSkill() {
+            skillsCount++;
+            const container = document.getElementById('skills-container');
+            const skillHTML = `
+                <div class="dynamic-section" id="skill-${skillsCount}">
+                    <button class="remove-btn" onclick="removeSection('skill-${skillsCount}')">&times;</button>
+                    <div class="form-group">
+                        <label>Skill Name</label>
+                        <input type="text" id="skill-name-${skillsCount}" placeholder="JavaScript">
+                    </div>
+                    <div class="form-group">
+                        <label>Proficiency Level</label>
+                        <select id="skill-level-${skillsCount}">
+                            <option value="Beginner">Beginner</option>
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Advanced" selected>Advanced</option>
+                            <option value="Expert">Expert</option>
+                        </select>
+                    </div>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', skillHTML);
+            
+            // Add event listeners to new fields
+            const newSection = document.getElementById(`skill-${skillsCount}`);
+            newSection.querySelectorAll('input, select').forEach(input => {
+                input.addEventListener('input', () => {
+                    updatePreview();
+                    triggerAutoSave();
+                });
+            });
+        }
+
+        function addProject() {
+            projectsCount++;
+            const container = document.getElementById('projects-container');
+            const projectHTML = `
+                <div class="dynamic-section" id="project-${projectsCount}">
+                    <button class="remove-btn" onclick="removeSection('project-${projectsCount}')">&times;</button>
+                    <div class="form-group">
+                        <label>Project Name</label>
+                        <input type="text" id="proj-name-${projectsCount}" placeholder="E-commerce Platform">
+                    </div>
+                    <div class="form-group">
+                        <label>Technologies Used</label>
+                        <input type="text" id="proj-tech-${projectsCount}" placeholder="React, Node.js, MongoDB">
+                    </div>
+                    <div class="form-group">
+                        <label>Project URL (Optional)</label>
+                        <input type="url" id="proj-url-${projectsCount}" placeholder="https://github.com/username/project">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="proj-description-${projectsCount}" placeholder="Built a full-stack e-commerce platform with user authentication, payment processing, and inventory management"></textarea>
+                        <button class="ai-assist" onclick="generateAIContent('proj-description-${projectsCount}')">
+                            <i class="fas fa-robot"></i> AI Assist
+                        </button>
+                    </div>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', projectHTML);
+            
+            // Add event listeners to new fields
+            const newSection = document.getElementById(`project-${projectsCount}`);
+            newSection.querySelectorAll('input, textarea').forEach(input => {
+                input.addEventListener('input', () => {
+                    updatePreview();
+                    triggerAutoSave();
+                });
+            });
+        }
+
+        function addCertification() {
+            certificationsCount++;
+            const container = document.getElementById('certifications-container');
+            const certificationHTML = `
+                <div class="dynamic-section" id="certification-${certificationsCount}">
+                    <button class="remove-btn" onclick="removeSection('certification-${certificationsCount}')">&times;</button>
+                    <div class="form-group">
+                        <label>Certification Name</label>
+                        <input type="text" id="cert-name-${certificationsCount}" placeholder="AWS Certified Solutions Architect">
+                    </div>
+                    <div class="form-group">
+                        <label>Issuing Organization</label>
+                        <input type="text" id="cert-issuer-${certificationsCount}" placeholder="Amazon Web Services">
+                    </div>
+                    <div class="form-group">
+                        <label>Issue Date</label>
+                        <input type="month" id="cert-date-${certificationsCount}">
+                    </div>
+                    <div class="form-group">
+                        <label>Expiration Date (Optional)</label>
+                        <input type="month" id="cert-expiry-${certificationsCount}">
+                    </div>
+                    <div class="form-group">
+                        <label>Credential ID (Optional)</label>
+                        <input type="text" id="cert-id-${certificationsCount}" placeholder="ABC123456">
+                    </div>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', certificationHTML);
+            
+            // Add event listeners to new fields
+            const newSection = document.getElementById(`certification-${certificationsCount}`);
+            newSection.querySelectorAll('input').forEach(input => {
+                input.addEventListener('input', () => {
+                    updatePreview();
+                    triggerAutoSave();
+                });
+            });
+        }
+
+        function removeSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.remove();
+                updatePreview();
+                triggerAutoSave();
+                showNotification('Section removed', 'info');
+            }
+        }
+
+        function updatePreview() {
+            showLoading();
+            
+            setTimeout(() => {
+                // Update personal information
+                updatePersonalInfo();
+                
+                // Update sections
+                updateEducationPreview();
+                updateExperiencePreview();
+                updateSkillsPreview();
+                updateProjectsPreview();
+                updateCertificationsPreview();
+                
+                // Apply current theme
+                updateTheme();
+                
+                hideLoading();
+            }, 300);
+        }
+
+        function updatePersonalInfo() {
+            const name = document.getElementById('fullName').value || 'Your Name';
+            const title = document.getElementById('title').value || 'Professional Title';
+            const email = document.getElementById('email').value || 'email@example.com';
+            const phone = document.getElementById('phone').value || '+1 (555) 123-4567';
+            const location = document.getElementById('location').value || 'Location';
+            const linkedin = document.getElementById('linkedin').value || 'LinkedIn';
+            const summary = document.getElementById('summary').value || 'Your professional summary will appear here...';
+
+            document.getElementById('preview-name').textContent = name;
+            document.getElementById('preview-title').textContent = title;
+            document.getElementById('preview-email').textContent = email;
+            document.getElementById('preview-phone').textContent = phone;
+            document.getElementById('preview-location').textContent = location;
+            document.getElementById('preview-linkedin').textContent = linkedin;
+            document.getElementById('preview-summary').textContent = summary;
+        }
+
+        function updateEducationPreview() {
+            const container = document.getElementById('preview-education');
+            container.innerHTML = '';
+            
+            const educationSections = document.querySelectorAll('[id^="education-"]');
+            educationSections.forEach(section => {
+                const id = section.id.split('-')[1];
+                const institution = document.getElementById(`edu-institution-${id}`)?.value || '';
+                const degree = document.getElementById(`edu-degree-${id}`)?.value || '';
+                const location = document.getElementById(`edu-location-${id}`)?.value || '';
+                const year = document.getElementById(`edu-year-${id}`)?.value || '';
+                const gpa = document.getElementById(`edu-gpa-${id}`)?.value || '';
+
+                if (institution || degree) {
+                    const educationItem = document.createElement('div');
+                    educationItem.className = 'cv-item';
+                    educationItem.innerHTML = `
+                        <h3>${degree}</h3>
+                        <div class="meta">${institution}${location ? `, ${location}` : ''} ${year ? `| ${year}` : ''}</div>
+                        ${gpa ? `<p><strong>GPA:</strong> ${gpa}</p>` : ''}
+                    `;
+                    container.appendChild(educationItem);
+                }
+            });
+
+            // Hide section if no education entries
+            const educationSection = document.getElementById('education-section');
+            educationSection.style.display = container.children.length > 0 ? 'block' : 'none';
+        }
+
+        function updateExperiencePreview() {
+            const container = document.getElementById('preview-experience');
+            container.innerHTML = '';
+            
+            const experienceSections = document.querySelectorAll('[id^="experience-"]');
+            experienceSections.forEach(section => {
+                const id = section.id.split('-')[1];
+                const company = document.getElementById(`exp-company-${id}`)?.value || '';
+                const position = document.getElementById(`exp-position-${id}`)?.value || '';
+                const location = document.getElementById(`exp-location-${id}`)?.value || '';
+                const startDate = document.getElementById(`exp-start-${id}`)?.value || '';
+                const endDate = document.getElementById(`exp-end-${id}`)?.value || '';
+                const isCurrent = document.getElementById(`exp-current-${id}`)?.checked || false;
+                const description = document.getElementById(`exp-description-${id}`)?.value || '';
+
+                if (company || position) {
+                    const experienceItem = document.createElement('div');
+                    experienceItem.className = 'cv-item';
+                    
+                    const dateRange = startDate ? 
+                        `${formatDate(startDate)} - ${isCurrent ? 'Present' : (endDate ? formatDate(endDate) : 'Present')}` : '';
+                    
+                    experienceItem.innerHTML = `
+                        <h3>${position}</h3>
+                        <div class="meta">${company}${location ? `, ${location}` : ''} ${dateRange ? `| ${dateRange}` : ''}</div>
+                        ${description ? `<p>${formatDescription(description)}</p>` : ''}
+                    `;
+                    container.appendChild(experienceItem);
+                }
+            });
+
+            // Hide section if no experience entries
+            const experienceSection = document.getElementById('experience-section');
+            experienceSection.style.display = container.children.length > 0 ? 'block' : 'none';
+        }
+
+        function updateSkillsPreview() {
+            const container = document.getElementById('preview-skills');
+            container.innerHTML = '';
+            
+            const skillSections = document.querySelectorAll('[id^="skill-"]');
+            skillSections.forEach(section => {
+                const id = section.id.split('-')[1];
+                const skillName = document.getElementById(`skill-name-${id}`)?.value || '';
+                const skillLevel = document.getElementById(`skill-level-${id}`)?.value || '';
+
+                if (skillName) {
+                    const skillItem = document.createElement('div');
+                    skillItem.className = 'skill-item';
+                    skillItem.innerHTML = `
+                        ${skillName}
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${getSkillPercentage(skillLevel)}%"></div>
+                        </div>
+                    `;
+                    container.appendChild(skillItem);
+                }
+            });
+
+            // Hide section if no skills entries
+            const skillsSection = document.getElementById('skills-section');
+            skillsSection.style.display = container.children.length > 0 ? 'block' : 'none';
+        }
+
+        function updateProjectsPreview() {
+            const container = document.getElementById('preview-projects');
+            container.innerHTML = '';
+            
+            const projectSections = document.querySelectorAll('[id^="project-"]');
+            projectSections.forEach(section => {
+                const id = section.id.split('-')[1];
+                const projectName = document.getElementById(`proj-name-${id}`)?.value || '';
+                const tech = document.getElementById(`proj-tech-${id}`)?.value || '';
+                const url = document.getElementById(`proj-url-${id}`)?.value || '';
+                const description = document.getElementById(`proj-description-${id}`)?.value || '';
+
+                if (projectName) {
+                    const projectItem = document.createElement('div');
+                    projectItem.className = 'cv-item';
+                    projectItem.innerHTML = `
+                        <h3>${projectName} ${url ? `<a href="${url}" target="_blank" style="color: ${currentTheme};"> <i class="fas fa-external-link-alt"></i></a>` : ''}</h3>
+                        ${tech ? `<div class="meta"><i class="fas fa-code"></i> ${tech}</div>` : ''}
+                        ${description ? `<p>${description}</p>` : ''}
+                    `;
+                    container.appendChild(projectItem);
+                }
+            });
+
+            // Hide section if no projects entries
+            const projectsSection = document.getElementById('projects-section');
+            projectsSection.style.display = container.children.length > 0 ? 'block' : 'none';
+        }
+
+        function updateCertificationsPreview() {
+            const container = document.getElementById('preview-certifications');
+            container.innerHTML = '';
+            
+            const certSections = document.querySelectorAll('[id^="certification-"]');
+            certSections.forEach(section => {
+                const id = section.id.split('-')[1];
+                const certName = document.getElementById(`cert-name-${id}`)?.value || '';
+                const issuer = document.getElementById(`cert-issuer-${id}`)?.value || '';
+                const date = document.getElementById(`cert-date-${id}`)?.value || '';
+                const expiry = document.getElementById(`cert-expiry-${id}`)?.value || '';
+                const credId = document.getElementById(`cert-id-${id}`)?.value || '';
+
+                if (certName) {
+                    const certItem = document.createElement('div');
+                    certItem.className = 'cv-item';
+                    
+                    const dateInfo = date ? 
+                        `${formatDate(date)}${expiry ? ` - ${formatDate(expiry)}` : ''}` : '';
+                    
+                    certItem.innerHTML = `
+                        <h3>${certName}</h3>
+                        <div class="meta">${issuer} ${dateInfo ? `| <i class="fas fa-calendar-alt"></i> ${dateInfo}` : ''}</div>
+                        ${credId ? `<p><strong>Credential ID:</strong> ${credId}</p>` : ''}
+                    `;
+                    container.appendChild(certItem);
+                }
+            });
+
+            // Hide section if no certifications entries
+            const certificationsSection = document.getElementById('certifications-section');
+            certificationsSection.style.display = container.children.length > 0 ? 'block' : 'none';
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            const date = new Date(dateString + '-01');
+            return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+        }
+
+        function formatDescription(description) {
+            return description.replace(/\n/g, '<br>');
+        }
+
+        function getSkillPercentage(level) {
+            const levels = {
+                'Beginner': 25,
+                'Intermediate': 50,
+                'Advanced': 75,
+                'Expert': 100
+            };
+            return levels[level] || 50;
+        }
+
+        function showLoading() {
+            document.getElementById('loading').classList.add('show');
+        }
+
+        function hideLoading() {
+            document.getElementById('loading').classList.remove('show');
+        }
+
+        function triggerAutoSave() {
+            clearTimeout(autoSaveTimeout);
+            document.getElementById('auto-save-status').textContent = 'Auto-save: Saving...';
+            
+            autoSaveTimeout = setTimeout(() => {
+                saveData();
+                document.getElementById('auto-save-status').textContent = 'Auto-save: Saved';
+            }, 2000);
+        }
+
+        function saveData() {
+            showNotification('Data saved successfully', 'success');
+        }
+
+        function generateAIContent(fieldId) {
+            showNotification('Generating AI content...', 'info');
+            
+            // Simulate AI generation with a timeout
+            setTimeout(() => {
+                let content = '';
+                
+                if (fieldId === 'summary') {
+                    content = 'Experienced software engineer with 5+ years in full-stack development. Specialized in creating scalable web applications using modern JavaScript frameworks. Proven ability to lead technical teams and deliver projects on time. Passionate about clean code and user experience.';
+                } else if (fieldId.startsWith('exp-description')) {
+                    content = '• Led a team of 8 engineers to develop a React-based SaaS platform\n• Reduced application load time by 65% through performance optimization\n• Implemented CI/CD pipeline that reduced deployment time by 40%\n• Mentored junior developers and conducted technical interviews';
+                } else if (fieldId.startsWith('proj-description')) {
+                    content = 'Developed a comprehensive e-commerce platform with real-time analytics dashboard. Implemented secure payment processing with Stripe integration and developed a recommendation engine that increased sales by 22%. The platform handles over 50,000 monthly active users.';
+                }
+                
+                document.getElementById(fieldId).value = content;
+                updatePreview();
+                showNotification('AI content generated successfully', 'success');
+            }, 1500);
+        }
+
+        function showAIPanel() {
+            showNotification('AI Assistant: Try "Generate Summary" or "Improve Job Description"', 'info');
+        }
+
+        function downloadPDF() {
+            const element = document.getElementById('cv-preview');
+            const pageSize = document.getElementById('pageSize').value;
+            const orientation = document.getElementById('orientation').value;
+            const margin = parseInt(document.getElementById('margin').value);
+            const quality = parseFloat(document.getElementById('quality').value);
+            
+            const opt = {
+                margin: margin,
+                filename: `${document.getElementById('fullName').value || 'CV'}_Resume.pdf`,
+                image: { type: 'jpeg', quality: quality },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: pageSize, orientation: orientation }
+            };
+
+            showNotification('Generating PDF...', 'info');
+            
+            // Show loading while generating PDF
+            const pdfSpinner = document.createElement('div');
+            pdfSpinner.className = 'spinner';
+            document.body.appendChild(pdfSpinner);
+            
+            html2pdf().set(opt).from(element).save().then(() => {
+                document.body.removeChild(pdfSpinner);
+                showNotification('PDF downloaded successfully!', 'success');
+            }).catch(() => {
+                document.body.removeChild(pdfSpinner);
+                showNotification('Error generating PDF', 'error');
+            });
+        }
+
+        function showNotification(message, type) {
+            // Remove any existing notifications
+            document.querySelectorAll('.notification').forEach(el => el.remove());
+            
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
+                ${message}
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        function addSampleData() {
+            // Only add sample data if there's no existing data
+            if (educationCount > 0) return;
+            
+            // Personal info
+            document.getElementById('fullName').value = 'Alex Johnson';
+            document.getElementById('title').value = 'Senior UX Designer';
+            document.getElementById('email').value = 'alex.johnson@email.com';
+            document.getElementById('phone').value = '+1 (415) 123-4567';
+            document.getElementById('location').value = 'San Francisco, CA';
+            document.getElementById('linkedin').value = 'linkedin.com/in/alexjohnson';
+            document.getElementById('summary').value = 'Creative UX designer with 7+ years of experience in creating user-centered digital products. Specialized in design systems and user research. Passionate about solving complex problems through intuitive interfaces.';
+            
+            // Education
+            addEducation();
+            document.getElementById('edu-institution-1').value = 'Stanford University';
+            document.getElementById('edu-degree-1').value = 'Master of Fine Arts in Design';
+            document.getElementById('edu-location-1').value = 'Stanford, CA';
+            document.getElementById('edu-year-1').value = '2015';
+            document.getElementById('edu-gpa-1').value = '3.9/4.0';
+            
+            // Experience
+            addExperience();
+            document.getElementById('exp-company-1').value = 'Adobe Creative';
+            document.getElementById('exp-position-1').value = 'Senior UX Designer';
+            document.getElementById('exp-location-1').value = 'San Jose, CA';
+            document.getElementById('exp-start-1').value = '2019-06';
+            document.getElementById('exp-current-1').checked = true;
+            document.getElementById('exp-description-1').value = '• Led design for Adobe XD features used by 2M+ designers\n• Conducted user research that improved product engagement by 35%\n• Collaborated with engineering teams to implement design systems';
+            
+            addExperience();
+            document.getElementById('exp-company-2').value = 'Google';
+            document.getElementById('exp-position-2').value = 'UX Designer';
+            document.getElementById('exp-location-2').value = 'Mountain View, CA';
+            document.getElementById('exp-start-2').value = '2016-03';
+            document.getElementById('exp-end-2').value = '2019-05';
+            document.getElementById('exp-description-2').value = '• Designed user flows for Google Drive mobile app\n• Created prototypes that reduced user drop-off by 28%\n• Collaborated with Material Design team on component library';
+            
+            // Skills
+            addSkill();
+            document.getElementById('skill-name-1').value = 'User Research';
+            document.getElementById('skill-level-1').value = 'Expert';
+            
+            addSkill();
+            document.getElementById('skill-name-2').value = 'Figma';
+            document.getElementById('skill-level-2').value = 'Expert';
+            
+            addSkill();
+            document.getElementById('skill-name-3').value = 'Prototyping';
+            document.getElementById('skill-level-3').value = 'Advanced';
+            
+            // Projects
+            addProject();
+            document.getElementById('proj-name-1').value = 'Adobe Design System';
+            document.getElementById('proj-tech-1').value = 'Figma, React, Storybook';
+            document.getElementById('proj-url-1').value = 'https://adobe.design/system';
+            document.getElementById('proj-description-1').value = 'Led the creation of a comprehensive design system used across Adobe products. Improved design consistency and reduced development time by 40%.';
+            
+            // Certifications
+            addCertification();
+            document.getElementById('cert-name-1').value = 'Adobe Certified Expert';
+            document.getElementById('cert-issuer-1').value = 'Adobe';
+            document.getElementById('cert-date-1').value = '2022-08';
+            document.getElementById('cert-id-1').value = 'ACE-2022-1234';
+            
+            updatePreview();
+        }
+    </script>
+</body>
+</html>
